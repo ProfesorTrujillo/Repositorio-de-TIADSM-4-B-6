@@ -2,15 +2,15 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.use(express.json()); // Middleware para parsear el cuerpo de las solicitudes en formato JSON
+app.use(express.json()); 
 
 // Datos simulados
 let todos = [
-    { id: 1, task: 'Preparar la clase' },
-    { id: 2, task: 'Pasar la lista de asistencia' },
-    { id: 3, task: 'Impartir la clase frente al grupo' },
-    { id: 4, task: 'Revisar las actividades de aprendizaje de los alumnos' },
-    { id: 5, task: 'Generar las calificaciones' },
+    { id: 1, tarea: 'Preparar la clase' },
+    { id: 2, tarea: 'Pasar la lista de asistencia' },
+    { id: 3, tarea: 'Impartir la clase frente al grupo' },
+    { id: 4, tarea: 'Revisar las actividades de aprendizaje de los alumnos' },
+    { id: 5, tarea: 'Generar las calificaciones' },
 ];
 
 // GET: Obtener todas las tareas
@@ -32,7 +32,7 @@ app.get('/todos/:id', (req, res) => {
 app.post('/todos', (req, res) => {
     const newTodo = {
         id: todos.length + 1,
-        task: req.body.task
+        tarea: req.body.tarea
     };
     todos.push(newTodo);
     res.status(201).json(newTodo);
@@ -45,7 +45,7 @@ app.put('/todos/:id', (req, res) => {
     if (!todo) {
         return res.status(404).send('Tarea no encontrada');
     }
-    todo.task = req.body.task;
+    todo.tarea = req.body.tarea;
     res.json(todo);
 });
 
@@ -62,5 +62,5 @@ app.delete('/todos/:id', (req, res) => {
 
 // Iniciar el servidor
 app.listen(port, () => {
-    console.log(`API escuchando en http://localhost:${port}`);
+    console.log('API conectada en http://localhost:${port}');
 });
